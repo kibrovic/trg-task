@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hello-world-dev
+  name: hello-world-staging
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: dev
+    namespace: staging
     server: 'https://kubernetes.default.svc'
   source:
     path: deployment/hello-world
@@ -15,12 +15,12 @@ spec:
     helm:
       valuesObject:
         ingressRoute:
-          matchRule: Host(`dev-traefik.localhost`) && PathPrefix(`/`)
+          matchRule: Host(`staging-traefik.localhost`) && PathPrefix(`/`)
+        networkPolicy:
+          denyAllEgress: true
   project: default
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    automated: null
     syncOptions:
       - CreateNamespace=true
 
