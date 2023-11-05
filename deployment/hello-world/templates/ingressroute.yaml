@@ -24,9 +24,9 @@ spec:
       name: {{ $fullName }}
       port: {{ $svcPort }}
     {{- if .Values.middlewares }}
-      middlewares:
-      - {{ template "hello-world.fullname" . }}
-      {{- end -}}
+    middlewares:
+    - name: {{ template "hello-world.fullname" . }}
+    {{- end -}}
 
   {{- with .Values.ingressRoute.tls }}
   tls:
