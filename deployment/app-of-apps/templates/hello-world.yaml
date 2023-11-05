@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-world-dev
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: dev
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: deployment/hello-world
+    repoURL: 'https://gitlab.com/kibrovic/trg-task.git'
+    targetRevision: main
+    helm:
+      valuesObject:
+        ingress:
+          hosts:
+          - host: dev.localhost
+            paths:
+            - path: /
+              pathType: ImplementationSpecific
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
