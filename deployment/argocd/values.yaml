@@ -1,0 +1,25 @@
+configs:
+  params:
+    server.insecure: true
+
+server:
+  ingress:
+    enabled: true
+    ingressClassName: "traefik"
+    hosts:
+     - argocd.localhost
+
+repositories:
+  trg-task:
+    url: https://gitlab.com/kibrovic/trg-task.git
+    name: hello-world-dev
+    type: helm
+    username: argocd
+    password: ""
+
+dex:
+  enabled: false
+applicationSet:
+  enabled: false
+notifications:
+  enabled: false
