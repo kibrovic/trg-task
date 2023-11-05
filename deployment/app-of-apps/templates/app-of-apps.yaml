@@ -14,5 +14,5 @@ spec:
     targetRevision: main
   project: default
   syncPolicy:
-    automated:
-      selfHeal: true
+    automated: null
+      # selfHeal: true
