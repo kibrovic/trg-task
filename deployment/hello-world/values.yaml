@@ -65,14 +65,18 @@ ingressRoute:
   entryPoints:
   - web
   - websecure
-  matchRule: Host(`dev-traefik.localhost`) && PathPrefix(`/`)
+  # matchRule: Host(`dev-traefik.localhost`) && PathPrefix(`/`)
+  matchRule: ""
   tls: {}
 
 middlewares:
   ipWhiteList:
     sourceRange:
     - 127.0.0.1/32
-    - 192.168.1.135
+    - 10.42.0.1/24
+
+networkPolicy:
+  denyAllEgress: false
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
