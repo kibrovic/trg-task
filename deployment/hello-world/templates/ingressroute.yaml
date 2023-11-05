@@ -1,0 +1,35 @@
+{{- if .Values.ingressRoute.enabled -}}
+{{- $fullName := include "hello-world.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ template "hello-world.fullname" . }}
+  annotations:
+    {{- with .Values.ingressRoute.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  labels:
+    {{- include "hello-world.labels" . | nindent 4 }}
+spec:
+  entryPoints:
+  {{- range .Values.ingressRoute.entryPoints }}
+  - {{ . }}
+  {{- end }}
+  routes:
+  - match: {{ .Values.ingressRoute.matchRule }}
+    kind: Rule
+    services:
+    - kind: Service
+      name: {{ $fullName }}
+      port: {{ $svcPort }}
+    {{- if .Values.middlewares }}
+      middlewares:
+      - {{ template "hello-world.fullname" . }}
+      {{- end -}}
+
+  {{- with .Values.ingressRoute.tls }}
+  tls:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end -}}
