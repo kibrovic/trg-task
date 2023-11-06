@@ -26,4 +26,6 @@ podTemplate {
     //         app.push("latest")
     //     }
     // }
+    }
+
 }
