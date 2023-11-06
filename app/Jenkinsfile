@@ -31,7 +31,7 @@ spec:
         }
     }
     environment {
-        IMAGE_PUSH_DESTINATION="kibrovic/trg-task:kaniko"
+        IMAGE_PUSH_DESTINATION="kibrovic/trg-task:v1"
     }
     stages {
         stage('Build with Kaniko') {
