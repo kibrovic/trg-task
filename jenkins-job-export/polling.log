@@ -1,0 +1,25 @@
+Started on Nov 6, 2023, 5:05:00 AM
+Using strategy: Default
+[poll] Last Built Revision: Revision c2f60fc9591d46365d2c6eb9c2e92c461ee94d0e (refs/remotes/origin/TRG-6)
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential github-pat-username-password
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.2'
+using GIT_ASKPASS to set credentials github-pat-username-password
+ > git ls-remote -h -- https://github.com/kibrovic/trg-task.git # timeout=10
+Found 2 remote heads on https://github.com/kibrovic/trg-task.git
+[poll] Latest remote head revision on refs/heads/TRG-6 is: 75e2dc113366efb968f218da7efd84192f004ae8
+Using strategy: Default
+[poll] Last Built Revision: Revision c2f60fc9591d46365d2c6eb9c2e92c461ee94d0e (refs/remotes/origin/TRG-6)
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential github-pat-username-password
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.2'
+using GIT_ASKPASS to set credentials github-pat-username-password
+ > git ls-remote -h -- https://github.com/kibrovic/trg-task.git # timeout=10
+Found 2 remote heads on https://github.com/kibrovic/trg-task.git
+[poll] Latest remote head revision on refs/heads/TRG-6 is: 75e2dc113366efb968f218da7efd84192f004ae8
+Done. Took 1.1 sec
+Changes found
