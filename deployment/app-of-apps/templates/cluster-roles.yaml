@@ -10,6 +10,7 @@ spec:
   source:
     repoURL: 'https://gitlab.com/kibrovic/trg-task.git'
     path: deployment/clusterroles
+    targetRevision: main
   project: default
   syncPolicy:
     automated:
