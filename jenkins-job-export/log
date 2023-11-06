@@ -1,0 +1,205 @@
+Started by an SCM change
+Obtained app/Jenkinsfile from git https://github.com/kibrovic/trg-task.git
+[8mha:////4AorveP6Kc2ZmWFrllI6uDYbJZgL+f/t5FREA89hiTyLAAAAoh+LCAAAAAAAAP9tjTEOwjAQBM8BClpKHuFItIiK1krDC0x8GCfWnbEdkooX8TX+gCESFVvtrLSa5wtWKcKBo5UdUu8otU4GP9jS5Mixv3geZcdn2TIl9igbHBs2eJyx4YwwR1SwULBGaj0nRzbDRnX6rmuvydanHMu2V1A5c4MHCFXMWcf8hSnC9jqYxPTz/BXAFEIGsfuclm8zQVqFvQAAAA==[0m[Pipeline] Start of Pipeline
+[8mha:////4DVSX0senRb4V1esuRz7XralRrNrxpttqawea4bAg0uvAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycohUghExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jduZBmjwAAAAA==[0m[Pipeline] podTemplate
+[8mha:////4CSFcajs2t5og6NOUIr9MZGHaUI4tEipAaCrOUY2CRq0AAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gA0xsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfoP95RwAAAAA==[0m[Pipeline] {
+[8mha:////4FMmshlP0gEZBJxDbIvGg+sUThxXmslhFulT3jmpFCcmAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gQkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jc09154wAAAAA==[0m[Pipeline] node
+Created Pod: kubernetes jenkins/build-28-kp6r8-6xtg2-nzghj
+Agent [8mha:////4J27D4jmRiMbUtRrE5atC3PXFpDKD1c+kvw0hjvXNl/WAAAAsB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAypEgYV/eT83ILSktQi/aTSzJwUXSML3ewCsyILXbOKknQj3byq9IwsABk/z5nZAAAA[0mbuild-28-kp6r8-6xtg2-nzghj is provisioned from template build_28-kp6r8-6xtg2
+---
+apiVersion: "v1"
+kind: "Pod"
+metadata:
+  annotations:
+    buildUrl: "http://jenkins.jenkins.svc.cluster.local:8080/job/build/28/"
+    runUrl: "job/build/28/"
+  labels:
+    jenkins/jenkins-jenkins-agent: "true"
+    jenkins/label-digest: "74581952107afde24bfc2abb2b0123e189217291"
+    jenkins/label: "build_28-kp6r8"
+  name: "build-28-kp6r8-6xtg2-nzghj"
+  namespace: "jenkins"
+spec:
+  containers:
+  - command:
+    - "/busybox/cat"
+    image: "gcr.io/kaniko-project/executor:debug"
+    imagePullPolicy: "IfNotPresent"
+    name: "kaniko"
+    tty: true
+    volumeMounts:
+    - mountPath: "/kaniko/.docker"
+      name: "jenkins-docker-cfg"
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  - env:
+    - name: "JENKINS_SECRET"
+      value: "********"
+    - name: "JENKINS_TUNNEL"
+      value: "jenkins-agent.jenkins.svc.cluster.local:50000"
+    - name: "JENKINS_AGENT_NAME"
+      value: "build-28-kp6r8-6xtg2-nzghj"
+    - name: "JENKINS_NAME"
+      value: "build-28-kp6r8-6xtg2-nzghj"
+    - name: "JENKINS_AGENT_WORKDIR"
+      value: "/home/jenkins/agent"
+    - name: "JENKINS_URL"
+      value: "http://jenkins.jenkins.svc.cluster.local:8080/"
+    image: "jenkins/inbound-agent:3148.v532a_7e715ee3-1"
+    name: "jnlp"
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "100m"
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  nodeSelector:
+    kubernetes.io/os: "linux"
+  restartPolicy: "Never"
+  volumes:
+  - name: "jenkins-docker-cfg"
+    projected:
+      sources:
+      - secret:
+          items:
+          - key: ".dockerconfigjson"
+            path: "config.json"
+          name: "docker-credentials"
+  - emptyDir:
+      medium: ""
+    name: "workspace-volume"
+
+Running on [8mha:////4H/FISlCd5JQZg7ykVzaVMnSnws0tpvaK5U0VyuTBKVfAAAAtB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAypEgZd/eT83ILSktQi/aTSzJwUVSMXIwsgkV1gVgSizSpK0o2AdF5VekaWPgDa7bfh4gAAAA==[0mbuild-28-kp6r8-6xtg2-nzghj in /home/jenkins/agent/workspace/build
+[8mha:////4AxljYvHVdNbULfeV5E/Hi7h85Uu9uQv8qVMZ90C5U3lAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0ggUxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jek7ggRwAAAAA==[0m[Pipeline] {
+[8mha:////4OoZGfidJgJVzHWQF3sJpsHS2HNoXnexmstCR2BOlCJrAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gwExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jcChmMxwAAAAA==[0m[Pipeline] stage
+[8mha:////4JMo4yRAyFH+ROToEQPx6dBHIQVoPll2yWMat/XTp0RCAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0BAkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfpX/cvwAAAAA==[0m[Pipeline] { (Declarative: Checkout SCM)
+[8mha:////4KzLXMqAWnIQOze0dKbDVkz/xnOdzHQ9zvsO2+7pCdBbAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbaoyVLaHxBMgiwpL/WWDdrTyRV/MOEjexcpJJ5k3zXm9Y5wQnSpZ7g73DrB2PYbR18YlSfws0cU9XrgkzBcOlmSR15rygpGJgCWtgJWBjUAfKDm2BrfDqodqg0LaXkup3FNC4boAnMFHNRaXyhTnB7j52mfDn+SuAORZg+9pD/AAeoCAqvAAAAA==[0m[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential github-pat-username-password
+Cloning the remote Git repository
+Cloning repository https://github.com/kibrovic/trg-task.git
+ > git init /home/jenkins/agent/workspace/build # timeout=10
+Fetching upstream changes from https://github.com/kibrovic/trg-task.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.30.2'
+using GIT_ASKPASS to set credentials github-pat-username-password
+ > git fetch --tags --force --progress -- https://github.com/kibrovic/trg-task.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+Checking out Revision 75e2dc113366efb968f218da7efd84192f004ae8 (origin/TRG-6)
+Commit message: "Test commit 2"
+First time build. Skipping changelog.
+[8mha:////4MlxQfC+4K4u1l9X0vrT0SsHGGs5L1f6RqCHVdBxKFTkAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKBDglR0VppeIFJjHFi3QX7QlLxIr7GH4iIRMVWO9PM641lijhydKqx1HpKlVdd6N301MCxvQYeVMMXVTElDlaVdii5tqcZSxaLeVmOhcbKUhU4eXKCtW7MwxTBkCvOEid30Mh9fccTmZ7KYqJ8YYzY3Po6Mf06fwMYu06Q77aCbP8Brmfz270AAAA=[0m[Pipeline] }
+[8mha:////4CQRofFy6KPxWFLCylYQTbm37vgzHPQO751jXip5JgBgAAAAox+LCAAAAAAAAP9tjTESgjAQRT84FraWHiIMlYVjZZuh8QQRYgxkdjFZhMoTeTXvICMzVv7qv9e81xvrFHHk6FRrqfOUaq/6MLj5qZFjdw08qpYvqmZKHKyq7FhxY08LViwWy7IcK42NpTpw8uQEW92ahymCIVecJc7uoJH75o4nMj2XxUT5whSxuw1NYvp1/gYw9b0gL0tBtv8Aj1Msdr0AAAA=[0m[Pipeline] // stage
+[8mha:////4Cg02Rg0LSe0XcakFEaD8xlK54InY14zvvpGG95TTQopAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQjKGgQFa3lhheY2Bgn1l2wLyQVL+Jr/IFAJCq22llpNc8XlDnBgZKXjcM2YK6D7GLvpyYHSu0l0iAbOsuaMFN0UrtBk3XHGTWxgzmigIWCpcM6Ug7oGVaqMXdTRYO+OnGatr2CItgbPECoycwm8RfGBOtrbzPhz/NXAGPHIHYMxWb7OZZvfPyORMEAAAA=[0m[Pipeline] withEnv
+[8mha:////4JbDYnICxyT9YzJztmCm8HpYjv099UGFKYOH+8oS07kIAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUwIiYukZZOEFoQkgb/V9+UtqJE3E17kBLJSY8WLYl673eUESGE7ETjcXWY6y96ELvpiQG4vYaaBANXURNGClYoeygyNhqqYqShUVZDisJa4t1oOjRJdjIRj90GTS68px42o4Scm/u8IRMTuSkOX3LyLC99SYS/jh/ATB2CfLdfrbD/Cw+y7kUycIAAAA=[0m[Pipeline] {
+[8mha:////4DJ/hjQ6xVtt2TBxlTFORSyY2HvnLKUQWS2lUOfl0TSJAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUCDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5Dv9rMd5mfxAbNWnxXCAAAA[0m[Pipeline] container
+[8mha:////4Pbfj+WJmZ9AFTf8aL4WgGBi3zdnoEdjfYN8U1syi1HDAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUSDAhpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD5WQ+PfCAAAA[0m[Pipeline] {
+[8mha:////4ESros5zeCvPTkg52N+dDOmZMJwIki9Lr40oi0S6anbBAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUDLAgpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD/s94rDCAAAA[0m[Pipeline] withEnv
+[8mha:////4F/UIoSLCq5ztR20N7s2ONN7L+Vijo5Jxz5Xd/S+yWK4AAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohULDAgpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD1+IXOLCAAAA[0m[Pipeline] {
+[8mha:////4BfOSeMZmT2YAe+4nLcYO+Pud4FcKNdkCYhCPbZgC+vVAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUTCAhpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD0rlhNLCAAAA[0m[Pipeline] stage
+[8mha:////4BSvxK8mefcps0Ts2UnlpXiWLoNTOh7L7KaX41iJlq/jAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUbCDE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5Dv9rMd5mfxASnCIIrCAAAA[0m[Pipeline] { (Build with Kaniko)
+[8mha:////4NTmfZKQt/bPOYV72UyKynJdhcrLVMV9/+NR0GE+JSUTAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOICdAilorXc8AKTGOPEugu2g1PxIr7GH7CIRMUWq51t5vWGZfBQszfYaeothcbi4EaTFyb2/dVxwo4v2DAFdhqlTpJbfZpRctQwpyhhIWClqXEcLJkIa9Gph6qcIlOdo8/fUUBp2zs8oRDZHJWPX5g8bG5jG5h+nr8CmIYI5e6Qa78dPhmQ9Da+AAAA[0m[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential github-pat-username-password
+Warning: JENKINS-30600: special launcher org.csanchez.jenkins.plugins.kubernetes.pipeline.ContainerExecDecorator$1@1b4b9afd; decorates RemoteLauncher[hudson.remoting.Channel@1c2fcd61:JNLP4-connect connection from 10.42.0.169/10.42.0.169:43972] will be ignored (a typical symptom is the Git executable not being run inside a designated container)
+Fetching changes from the remote Git repository
+Checking out Revision 75e2dc113366efb968f218da7efd84192f004ae8 (origin/TRG-6)
+Commit message: "Test commit 2"
+ > git config remote.origin.url https://github.com/kibrovic/trg-task.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/TRG-6^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 75e2dc113366efb968f218da7efd84192f004ae8 # timeout=10
+[8mha:////4E4CPy9S3yxwlW4Bo+vik+pGn3mU//5lYnWssQr270ayAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKi0CFEldZKwwtMbIwT687YDknFi/gaf8AiEhVbrHa2mdcb1jHAiYPBXtNgKXYWvRtNXjhxGK6OJ+z5gh1TZKex1VPLSjcLtpw0LClKWAnYaOocR0smwVb08iErJ8lU5xTydxRQWnWHJxQim5MM6QtzgN1tVJHp5/krgNknKOtDrn3tP1ih7y++AAAA[0m[Pipeline] sh
+ > git rev-parse --resolve-git-dir /home/jenkins/agent/workspace/build/.git # timeout=10
+ > git config remote.origin.url https://github.com/kibrovic/trg-task.git # timeout=10
+Fetching upstream changes from https://github.com/kibrovic/trg-task.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.30.2'
+using GIT_ASKPASS to set credentials github-pat-username-password
+ > git fetch --tags --force --progress -- https://github.com/kibrovic/trg-task.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/TRG-6^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 75e2dc113366efb968f218da7efd84192f004ae8 # timeout=10
+[36mINFO[0m[0001] Retrieving image manifest python:3.9-bullseye 
+[36mINFO[0m[0001] Retrieving image python:3.9-bullseye from registry index.docker.io 
+[36mINFO[0m[0002] Built cross stage deps: map[]                
+[36mINFO[0m[0002] Retrieving image manifest python:3.9-bullseye 
+[36mINFO[0m[0002] Returning cached image manifest              
+[36mINFO[0m[0002] Executing 0 build triggers                   
+[36mINFO[0m[0002] Building stage 'python:3.9-bullseye' [idx: '0', base-idx: '-1'] 
+[36mINFO[0m[0002] Unpacking rootfs as cmd RUN pip install flask requires it. 
+[36mINFO[0m[0020] WORKDIR /app                                 
+[36mINFO[0m[0020] Cmd: workdir                                 
+[36mINFO[0m[0020] Changed working directory to /app            
+[36mINFO[0m[0020] Creating directory /app with uid -1 and gid -1 
+[36mINFO[0m[0020] Taking snapshot of files...                  
+[36mINFO[0m[0020] EXPOSE 8080                                  
+[36mINFO[0m[0020] Cmd: EXPOSE                                  
+[36mINFO[0m[0020] Adding exposed port: 8080/tcp                
+[36mINFO[0m[0020] RUN pip install flask                        
+[36mINFO[0m[0020] Initializing snapshotter ...                 
+[36mINFO[0m[0020] Taking snapshot of full filesystem...        
+[36mINFO[0m[0023] Cmd: /bin/sh                                 
+[36mINFO[0m[0023] Args: [-c pip install flask]                 
+[36mINFO[0m[0023] Running: [/bin/sh -c pip install flask]      
+Collecting flask
+  Downloading flask-3.0.0-py3-none-any.whl (99 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 99.7/99.7 kB 1.2 MB/s eta 0:00:00
+Collecting click>=8.1.3
+  Downloading click-8.1.7-py3-none-any.whl (97 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 97.9/97.9 kB 4.5 MB/s eta 0:00:00
+Collecting itsdangerous>=2.1.2
+  Downloading itsdangerous-2.1.2-py3-none-any.whl (15 kB)
+Collecting Werkzeug>=3.0.0
+  Downloading werkzeug-3.0.1-py3-none-any.whl (226 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 226.7/226.7 kB 2.0 MB/s eta 0:00:00
+Collecting importlib-metadata>=3.6.0
+  Downloading importlib_metadata-6.8.0-py3-none-any.whl (22 kB)
+Collecting Jinja2>=3.1.2
+  Downloading Jinja2-3.1.2-py3-none-any.whl (133 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.1/133.1 kB 8.4 MB/s eta 0:00:00
+Collecting blinker>=1.6.2
+  Downloading blinker-1.7.0-py3-none-any.whl (13 kB)
+Collecting zipp>=0.5
+  Downloading zipp-3.17.0-py3-none-any.whl (7.4 kB)
+Collecting MarkupSafe>=2.0
+  Downloading MarkupSafe-2.1.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (25 kB)
+Installing collected packages: zipp, MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, importlib-metadata, flask
+Successfully installed Jinja2-3.1.2 MarkupSafe-2.1.3 Werkzeug-3.0.1 blinker-1.7.0 click-8.1.7 flask-3.0.0 importlib-metadata-6.8.0 itsdangerous-2.1.2 zipp-3.17.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+[notice] A new release of pip is available: 23.0.1 -> 23.3.1
+[notice] To update, run: pip install --upgrade pip
+[36mINFO[0m[0027] Taking snapshot of full filesystem...        
+[36mINFO[0m[0029] RUN useradd -s /bin/bash trg                 
+[36mINFO[0m[0029] Cmd: /bin/sh                                 
+[36mINFO[0m[0029] Args: [-c useradd -s /bin/bash trg]          
+[36mINFO[0m[0029] Running: [/bin/sh -c useradd -s /bin/bash trg] 
+[36mINFO[0m[0029] Taking snapshot of full filesystem...        
+[36mINFO[0m[0030] USER trg                                     
+[36mINFO[0m[0030] Cmd: USER                                    
+[36mINFO[0m[0030] COPY hello-world.py hello-world.py           
+[36mINFO[0m[0030] Taking snapshot of files...                  
+[36mINFO[0m[0030] ENTRYPOINT python /app/hello-world.py        
+[36mINFO[0m[0030] Pushing image to kibrovic/trg-task:v1        
+[36mINFO[0m[0039] Pushed index.docker.io/kibrovic/trg-task@sha256:d53c89e9c15ab361e4472c50877bd82f50da37fa40094669a5d51ee004a345c6 
+[8mha:////4OxW4at4hfogxtcRTrPfac4X5JUZRERDpkK+xgJ7hO1UAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPMIR6RCiSmul4QUmPowT687YDknFi/gaf8AiEhVbrHa2mdcb1jHAiYMRPdJgKXZWeDeavMTEYbg6nkTPF9ExRXYoWpxa1tgs2HJCWFKUsJKwQeocR0smwVb26qEqp8hU5xTyd5RQWn2HJxQym5MK6QtzgN1t1JHp5/krgNn7BGVd59ofPoukFhO+AAAA[0m[Pipeline] }
+[8mha:////4H+xFcDf0TYNTJCRovVLW9YYWBVOq9nWGUfqxZeXkzrlAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIioEFCqWgtN7zAJMY4se6C7eBUvIiv8QcsIlGxxWpnm3m9YRk81OwNdpp6S6GxOLjR5IWJfX91nLDjCzZMgZ1GqZPkVp9mlBw1zClKWAhYaWocB0smwlp06qEqp8hU5+jzdxRQ2vYOTyhENkfl4xcmD5vb2Aamn+evAKZhiFDu9rm2hw+4R02vvgAAAA==[0m[Pipeline] // stage
+[8mha:////4DidNlWBlYQ2RZXVMSgp+MLvkLmLGnCEtjKk2nFcOTF0AAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiEBIFSkVrueEFJjHGiXUXbAen4kV8jT9gEYmKLVY728zrDcvgoWZvsNPUWwqNxcGNJi9M7Pur44QdX7BhCuw0Sp0kt/o0o+SoYU5RwkLASlPjOFgyEdaiUw9VOUWmOkefv6OA0rZ3eEIhsjkqH78wedjcxjYw/Tx/BTANQ4Ryt8+1PXwAkWr3Ir4AAAA=[0m[Pipeline] }
+[8mha:////4HAuRq08xN1/v0bqPHAZVb6h9Y7evFhyPmVgVir+FneMAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIikKBBqWgtN7zAJMY4se6C7eBUvIiv8QcsIlGxxWpnm3m9YRk81OwNdpp6S6GxOLjR5IWJfX91nLDjCzZMgZ1GqZPkVp9mlBw1zClKWAhYaWocB0smwlp06qEqp8hU5+jzdxRQ2vYOTyhENkfl4xcmD5vb2Aamn+evAKZhiFDu9rm2hw+iiayevgAAAA==[0m[Pipeline] // withEnv
+[8mha:////4AauTmYwjg0zGPoyGB4AqracLUEjyEuxhLQQanjvXgLSAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIikKBBqWgtN7zAJMY4se6C7eBUvIiv8QcsIlGxxWpnm3m9YRk81OwNdpp6S6GxOLjR5IWJfX91nLDjCzZMgZ1GqZPkVp9mlBw1zClKWAhYaWocB0smwlp06qEqp8hU5+jzdxRQ2vYOTyhENkfl4xcmD5vb2Aamn+evAKZhiFDuDrm2+w+2qjGBvgAAAA==[0m[Pipeline] }
+[8mha:////4BUYwuNvi4qhbePq9LUedkhEpE9IQFkLo2S+L15r1ERdAAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiEBIFSkVrueEFJjHGiXUXbAen4kV8jT9gEYmKLVY728zrDcvgoWZvsNPUWwqNxcGNJi9M7Pur44QdX7BhCuw0Sp0kt/o0o+SoYU5RwkLASlPjOFgyEdaiUw9VOUWmOkefv6OA0rZ3eEIhsjkqH78wedjcxjYw/Tx/BTANQ4Ryd8i13X8AhUlqPb4AAAA=[0m[Pipeline] // container
+[8mha:////4Cji9NF302QlZadeLI/v0x5581Zfubeu+coDwVQo3BbiAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIioEFCqWgtN7zAJMY4se6C7eBUvIiv8QcsIlGxxWpnm3m9YRk81OwNdpp6S6GxOLjR5IWJfX91nLDjCzZMgZ1GqZPkVp9mlBw1zClKWAhYaWocB0smwlp06qEqp8hU5+jzdxRQ2vYOTyhENkfl4xcmD5vb2Aamn+evAKZhiFDuDrm2+w/zblhSvgAAAA==[0m[Pipeline] }
+[8mha:////4Len0JONHH/gWsjICq2GkZmLGZ9dqev75OTTzczSqsfbAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPMIR6RCiSmul4QUmPowT687YDknFi/gaf8AiEhVbrHa2mdcb1jHAiYMRPdJgKXZWeDeavMTEYbg6nkTPF9ExRXYoWpxa1tgs2HJCWFKUsJKwQeocR0smwVb26qEqp8hU5xTyd5RQWn2HJxQym5MK6QtzgN1t1JHp5/krgNn7BGV9yLWvP8CNA+6+AAAA[0m[Pipeline] // withEnv
+[8mha:////4JBGMg1FyV//VllbjI22iewEwkbAHj7thni2GhHnX0IIAAAApB+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMJBQqJBVLRWGl5gEmOcWHfBvpBUvIiv8QciIlGx1c4083pjmSKOHJ1qLLWeUuVVF3o3PTVwbK+BB9XwRVVMiYNVpR1Kru1pxpLFYl6WY6GxslQFTp6cYK0b8zBFMOSKs8TJHTRyX9/xRKanspgoXxgjNre+Tky/zt8Axq4T5LutINt/AKLrg3G9AAAA[0m[Pipeline] }
+[8mha:////4Iet2P59pDJltQIBXJtayPJmfXss/xCQoW33OaSxeET/AAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRQlSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLcVZPsPqJPq1b0AAAA=[0m[Pipeline] // node
+[8mha:////4OK6ttUwuJXWYqyH8T7CahNH9OAALz3lyI2YTtTl3ntHAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKRgA5R0VppeIFJjHFi3QX7QlLxIr7GH4iIRMVWO9PM641lijhydKqx1HpKlVdd6N301MCxvQYeVMMXVTElDlaVdii5tqcZSxaLeVmOhcbKUhU4eXKCtW7MwxTBkCvOEid30Mh9fccTmZ7KYqJ8YYzY3Po6Mf06fwMYu06Q77aCbP8B7tlN5b0AAAA=[0m[Pipeline] }
+[8mha:////4AUAuaQbokfKUv5sy7h/cV9P0f7ADgyqQagxt9xqZvFcAAAAoh+LCAAAAAAAAP9tjTESgjAQRT84FraWHiIUlI6VbYbGE0SIMZDZhWQRKk/k1byDjMxY+av/XvNeb2xTxImjU62lzlOqverD6JanJo7dLfCkWr6qmilxsKqyU8WNPa9YsVisy3JsNHaW6sDJkxPsdWsepgiGXHGRuLijRu6bAU9keimLifKFOeJwH5vE9Ov8DWDue0FeloKs/AD9ZUlGvQAAAA==[0m[Pipeline] // podTemplate
+[8mha:////4BID1A48MxDO9iLHEyF+ZcKQBmJnalyHR7gBkjGZeR+DAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKRgA5R0VppeIFJjHFi3QX7QlLxIr7GH4iIRMVWO9PM641lijhydKqx1HpKlVdd6N301MCxvQYeVMMXVTElDlaVdii5tqcZSxaLeVmOhcbKUhU4eXKCtW7MwxTBkCvOEid30Mh9fccTmZ7KYqJ8YYzY3Po6Mf06fwMYu06Q7/aCbPsBe4lug70AAAA=[0m[Pipeline] End of Pipeline
+Finished: SUCCESS
